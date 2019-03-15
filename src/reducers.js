@@ -28,6 +28,16 @@ const tasksApp = (state = initialState, action) => {
         tasks: state.tasks.filter(task => task.id !== action.id),
       }
 
+    case types.EDITABLE_TASK:
+      return {
+        ...state,
+        tasks: state.tasks.map(task => {
+          if (task.id === action.id) {
+            task.editable = true
+          }
+          return task
+        }),
+      }
 
 
     default:
