@@ -2,6 +2,7 @@ import { types }from './actions'
 
 const initialState = {
   tasks: [],
+  timeToComplete: null,
 }
 
 const tasksApp = (state = initialState, action) => {
@@ -16,8 +17,7 @@ const tasksApp = (state = initialState, action) => {
             title: action.title,
             type: action.typeTask,
             description: action.description,
-            editable: false,
-            completed: false
+            status: 0,
           }
         ],
       }
@@ -33,7 +33,7 @@ const tasksApp = (state = initialState, action) => {
         ...state,
         tasks: state.tasks.map(task => {
           if (task.id === action.id) {
-            task.editable = true
+            task.status = 1
           }
           return task
         }),
@@ -46,11 +46,33 @@ const tasksApp = (state = initialState, action) => {
             if (task.id === action.id) {
               task.type = action.typeTask
               task.description = action.description
-              task.editable = false
+              task.status = 0
             }
             return task
           }),
         }
+
+    case types.RUNNING_TASK:
+      return {
+        ...state,
+        tasks: state.tasks.map(task => {
+          if (task.id === action.id) {
+            task.status = 2
+          }
+          return task
+        }),
+      }
+
+    case types.STOP_TASK:
+      return {
+        ...state,
+        tasks: state.tasks.map(task => {
+          if (task.id === action.id) {
+            task.status = 0
+          }
+          return task
+        }),
+      }
 
     default:
       return state

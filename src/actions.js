@@ -3,6 +3,8 @@ export const types = {
   REMOVE_TASK: 'REMOVE_TASK',
   EDITABLE_TASK: 'EDITABLE_TASK',
   EDIT_TASK: 'EDIT_TASK',
+  RUNNING_TASK: 'RUNNING_TASK',
+  STOP_TASK: 'STOP_TASK',
 }
 
 let idTask = 0
@@ -39,6 +41,20 @@ export const actionCreators = {
       id: task.id,
       typeTask: task.type,
       description: task.description,
+    }
+  },
+  // RUNNING TASK
+  runningTask: (id) => {
+    return {
+      type: types.RUNNING_TASK,
+      id,
+    }
+  },
+  // STOP TASK
+  stopTask: (id) => {
+    return {
+      type: types.STOP_TASK,
+      id,
     }
   },
 }
