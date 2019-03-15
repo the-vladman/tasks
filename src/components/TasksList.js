@@ -16,7 +16,7 @@ class TasksList extends Component {
         footer={<div>Footer</div>}
         bordered
         dataSource={tasks}
-        renderItem={item => (<TaskItem task={item} onClick={() => dispatch(actionCreators.removeTask(item.id)) } />)}
+        renderItem={item => (<TaskItem task={item} deleteTask={() => dispatch(actionCreators.removeTask(item.id)) } editTask={(item) => dispatch(actionCreators.editTask(item)) } editableTask={() => dispatch(actionCreators.editableTask(item.id)) }/>)}
       />
     );
   }
