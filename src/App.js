@@ -1,25 +1,23 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import TasksList from './components/TasksList'
+import {  Row, Col, Layout, } from 'antd';
+const { Header, Content } = Layout
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Layout>
+          <Header/>
+          <Content style={{ backgroundColor: 'white', padding: 24, margin: 0, minHeight: 800, }}>
+            <Row type="flex" justify="center">
+              <Col span={10}>
+                <TasksList />
+              </Col>
+            </Row>
+          </Content>
+        </Layout>
       </div>
     );
   }
