@@ -39,6 +39,18 @@ const tasksApp = (state = initialState, action) => {
         }),
       }
 
+      case types.EDIT_TASK:
+        return {
+          ...state,
+          tasks: state.tasks.map(task => {
+            if (task.id === action.id) {
+              task.type = action.typeTask
+              task.description = action.description
+              task.editable = false
+            }
+            return task
+          }),
+        }
 
     default:
       return state
