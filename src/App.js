@@ -10,7 +10,7 @@ class App extends Component {
       <div className="App">
         <Layout>
           <Header/>
-          <Content style={{ padding: 24, margin: 0, minHeight: 800, }}>
+          <Content style={{ backgroundColor: 'white', padding: 24, margin: 0, minHeight: 800, }}>
             <Row type="flex" justify="center">
               <Col span={10}>
                 <TasksList />
