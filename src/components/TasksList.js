@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { actionCreators } from '../actions'
-import {  Row, Col, List, } from 'antd';
+import { List, } from 'antd';
 import AddTask from './AddTask'
 import TaskItem from './TaskItem'
 

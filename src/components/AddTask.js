@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Input, Button, Select , Icon, Divider, Col, Row } from 'antd';
+import { Input, Button, Select, } from 'antd';
 import { connect } from 'react-redux'
 import { actionCreators } from '../actions'
 
 const InputGroup = Input.Group;
-const { TextArea } = Input;
 const { Option } = Select;
 
 
