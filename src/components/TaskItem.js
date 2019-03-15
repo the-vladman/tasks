@@ -37,7 +37,7 @@ const TaskItem = ({ deleteTask, editableTask, editTask, task }) => {
     task.description = e.target.value
   }
 
-  const type = task.editable
+  const type = task.status === 1
               ?
               <Select defaultValue={task.type} onChange={onChangeType}>
                 <Option value="s">Corta</Option>
@@ -46,16 +46,16 @@ const TaskItem = ({ deleteTask, editableTask, editTask, task }) => {
               </Select>
               : <Tag color={typeColor}>{typeText}</Tag>
 
-  const actions = task.editable
+            const actions = task.status === 1
                 ? [<Button type="primary" ghost onClick={ () => editTask(task) }>Guardar</Button>]
                 : [<Button type="primary" ghost onClick={editableTask}>editar</Button>, <Icon onClick={deleteTask} type="close"/>]
 
-  const description = task.editable
+  const description = task.status === 1
                     ? <TextArea rows={2} onChange={onChangeDescription} defaultValue={task.description} />
                     : task.description
 
   return(
-  <List.Item actions={actions}>
+  <List.Item actions={task.status < 2 ? actions : null }>
     <List.Item.Meta
       avatar={type}
       title={<a>{task.title}</a>}
