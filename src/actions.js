@@ -8,13 +8,12 @@ let idTask = 0
 export const actionCreators = {
   // ADD TASK
   addTask: (task) => {
-    console.log(task);
     return {
       type: types.ADD_TASK,
       id: idTask++,
       title: task.title,
       typeTask: task.type,
-      description: "Ant Design, a design language for background applications, is refined by Ant UED Team",
+      description: '',
     }
   },
   // REMOVE TASK

@@ -16,6 +16,7 @@ const tasksApp = (state = initialState, action) => {
             title: action.title,
             type: action.typeTask,
             description: action.description,
+            editable: false,
             completed: false
           }
         ],
