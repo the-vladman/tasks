@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import TasksList from './components/TasksList'
 import {  Row, Col, Layout, } from 'antd';
+import { Add, List, Timer } from './containers';
 const { Header, Content } = Layout
 
 class App extends Component {
@@ -10,10 +10,15 @@ class App extends Component {
       <div className="App">
         <Layout>
           <Header/>
-          <Content style={{ backgroundColor: 'white', padding: 24, margin: 0, minHeight: 800, }}>
+          <Content style={{ padding: 24, margin: 0, minHeight: '100vh', }}>
             <Row type="flex" justify="center">
-              <Col span={10}>
-                <TasksList />
+              <Col span={12}>
+                <Add />
+              </Col>
+            </Row>
+            <Row type="flex" justify="center">
+              <Col span={12}>
+                <List />
               </Col>
             </Row>
           </Content>
