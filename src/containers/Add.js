@@ -9,6 +9,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
+    add: (n) => dispatch(actionCreators.addTask(n)),
   };
 };
 

@@ -5,7 +5,7 @@ import { actionCreators } from "../actions";
 const mapState = ({ tasks }) => {
   const tasksGroup = tasks;
   return {
-    tasksGroup
+    tasks
   };
 };
 
