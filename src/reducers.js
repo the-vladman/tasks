@@ -12,13 +12,7 @@ const tasksApp = (state = initialState, action) => {
         ...state,
         tasks: [
           ...state.tasks,
-          {
-            id: action.id,
-            title: action.title,
-            type: action.typeTask,
-            description: action.description,
-            status: 0,
-          }
+          action.task
         ],
       }
 

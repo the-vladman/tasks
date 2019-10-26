@@ -11,13 +11,10 @@ let idTask = 0
 
 export const actionCreators = {
   // ADD TASK
-  addTask: (task) => {
+  addTask: (newTask) => {
     return {
       type: types.ADD_TASK,
-      id: idTask++,
-      title: task.title,
-      typeTask: task.type,
-      description: '',
+      task: { id: idTask++, ...newTask, editable: false }
     }
   },
   // REMOVE TASK
