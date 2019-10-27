@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Form, Input, Button, Select } from "antd";
+import { DurationTypes } from '../Constants';
 const { Item } = Form;
 const { Option } = Select;
 
@@ -55,9 +56,9 @@ const TaskForm = Form.create({
               rules: [{ required: true, message: "Required!" }]
             })(
               <Select placeholder="Select duration" style={{ width: 150 }}>
-                <Option value={30}>(Small) 30m</Option>
-                <Option value={45}>(Medium) 45m</Option>
-                <Option value={60}>(Large) 60m</Option>
+                {
+                  DurationTypes.map(d => <Option key={d.key} value={d.timeValue}>{`(${d.tag}) ${d.timeValue} min`}</Option>)
+                }
               </Select>
             )}
           </Item>
