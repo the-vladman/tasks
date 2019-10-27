@@ -36,7 +36,7 @@ export const actionCreators = {
     return {
       type: types.EDIT_TASK,
       id: task.id,
-      typeTask: task.type,
+      estimated_duration: task.estimated_duration,
       description: task.description,
     }
   },

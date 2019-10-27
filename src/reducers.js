@@ -38,9 +38,9 @@ const tasksApp = (state = initialState, action) => {
           ...state,
           tasks: state.tasks.map(task => {
             if (task.id === action.id) {
-              task.type = action.typeTask
-              task.description = action.description
-              task.status = 0
+              task.estimated_duration = action.estimated_duration;
+              task.description = action.description;
+              task.editable = false;
             }
             return task
           }),
