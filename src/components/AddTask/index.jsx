@@ -1,26 +1,48 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { Form, Input, Button, Select } from "antd";
 const { Item } = Form;
 const { Option } = Select;
 
 const TaskForm = Form.create({
-  name: "add-task"
+  name: "add-task",
+  mapPropsToFields(props) {
+    const { task } = props;
+    const description = task
+      ? Form.createFormField({
+          value: task.description
+        })
+      : null;
+    const estimated_duration = task
+      ? Form.createFormField({
+          value: task.estimated_duration
+        })
+      : null;
+    return {
+      description,
+      estimated_duration
+    };
+  }
 })(
   class extends Component {
     handleSubmit = e => {
       e.preventDefault();
-      const { form, add } = this.props;
+      const { form, add, edit, task } = this.props;
       form.validateFields((err, values) => {
         if (!err) {
-          add(values);
-          form.resetFields();
+          if (edit) {
+            edit({ id: task.id, ...values });
+          } else {
+            add(values);
+            form.resetFields();
+          }
         }
       });
     };
 
     render() {
       const { getFieldDecorator } = this.props.form;
+      const iconButton = this.props.edit ? "edit" : "plus";
       return (
         <Form layout="inline" onSubmit={this.handleSubmit}>
           <Item hasFeedback label="Task">
@@ -40,8 +62,8 @@ const TaskForm = Form.create({
             )}
           </Item>
           <Item>
-            <Button type="primary" htmlType="submit">
-              Add task
+            <Button icon={iconButton} type="primary" htmlType="submit">
+              Task
             </Button>
           </Item>
         </Form>
@@ -51,7 +73,8 @@ const TaskForm = Form.create({
 );
 
 TaskForm.propTypes = {
-  add: PropTypes.func.isRequired,
-}
+  add: PropTypes.func,
+  edit: PropTypes.func
+};
 
 export default TaskForm;
