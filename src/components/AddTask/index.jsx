@@ -14,6 +14,7 @@ const TaskForm = Form.create({
       form.validateFields((err, values) => {
         if (!err) {
           add(values);
+          form.resetFields();
         }
       });
     };
