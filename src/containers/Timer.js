@@ -9,6 +9,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
+    start: (t) => dispatch(actionCreators.startTask(t)),
+    stop: (t) => dispatch(actionCreators.stopTask(t)),
   };
 };
 
