@@ -11,6 +11,9 @@ const mapState = ({ tasks }) => {
 
 const mapDispatch = dispatch => {
   return {
+    remove: (id) => dispatch(actionCreators.removeTask(id)),
+    setEditable: (id) => dispatch(actionCreators.editableTask(id)),
+    edit: (t) => dispatch(actionCreators.editTask(t)),
   };
 };
 
