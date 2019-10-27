@@ -46,26 +46,27 @@ const tasksApp = (state = initialState, action) => {
           }),
         }
 
-    case types.RUNNING_TASK:
+    case types.START_TASK:
       return {
         ...state,
-        tasks: state.tasks.map(task => {
-          if (task.id === action.id) {
-            task.status = 2
-          }
-          return task
-        }),
+        timer: {
+          runningTask: action.task,
+          deadline: Date.now() + 1000 * 60 * 3,
+          status: 1,
+        },
+        tasks: state.tasks.filter(task => task.id !== action.task.id),
       }
 
     case types.STOP_TASK:
       return {
         ...state,
-        tasks: state.tasks.map(task => {
-          if (task.id === action.id) {
-            task.status = 0
-          }
-          return task
-        }),
+        tasks: [
+          ...state.tasks,
+          action.task
+        ],
+        timer: {
+          ...initialState.timer
+        }
       }
 
     default:

@@ -3,7 +3,7 @@ export const types = {
   REMOVE_TASK: 'REMOVE_TASK',
   EDITABLE_TASK: 'EDITABLE_TASK',
   EDIT_TASK: 'EDIT_TASK',
-  RUNNING_TASK: 'RUNNING_TASK',
+  START_TASK: 'START_TASK',
   STOP_TASK: 'STOP_TASK',
 }
 
@@ -40,18 +40,18 @@ export const actionCreators = {
       description: task.description,
     }
   },
-  // RUNNING TASK
-  runningTask: (id) => {
+  // START TASK TIMER
+  startTask: (task) => {
     return {
-      type: types.RUNNING_TASK,
-      id,
+      type: types.START_TASK,
+      task,
     }
   },
   // STOP TASK
-  stopTask: (id) => {
+  stopTask: (task) => {
     return {
       type: types.STOP_TASK,
-      id,
+      task,
     }
   },
 }
