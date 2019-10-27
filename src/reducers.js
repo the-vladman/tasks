@@ -27,7 +27,7 @@ const tasksApp = (state = initialState, action) => {
         ...state,
         tasks: state.tasks.map(task => {
           if (task.id === action.id) {
-            task.status = 1
+            task.editable = true;
           }
           return task
         }),
