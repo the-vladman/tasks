@@ -2,8 +2,11 @@ import { connect } from "react-redux";
 import TaskTimer from "../components/TaskTimer";
 import { actionCreators } from "../actions";
 
-const mapState = state => {
+const mapState = ({tasks, timer}) => {
+  const nextTask = tasks[0];
   return {
+    nextTask,
+    timer
   };
 };
 
