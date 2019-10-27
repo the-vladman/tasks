@@ -16,7 +16,7 @@ class App extends Component {
                 <Add />
               </Col>
             </Row>
-            <Row type="flex" justify="center">
+            <Row type="flex" justify="center" style={{ marginTop: 24 }}>
               <Col span={12}>
                 <List />
               </Col>
