@@ -3,11 +3,12 @@ import TaskTimer from "../components/TaskTimer";
 import { actionCreators } from "../actions";
 
 const mapState = ({tasks, timer}) => {
-  const nextTask = tasks[0];
+  const todos = tasks.filter(t => t.status === 0);
+  const nextTask = todos[0];
   return {
     nextTask,
     timer,
-    canStart: tasks.length > 0 ? true : false 
+    canStart: todos.length > 0 ? true : false 
   };
 };
 
