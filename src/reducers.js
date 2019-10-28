@@ -1,7 +1,13 @@
 import { types }from './actions'
 
 const initialState = {
-  tasks: [],
+  tasks: [
+    /* TASK STATUS
+      0 = PENDING
+      1 = COMPLETED
+      -1 = ON TIMER
+    */
+  ],
   timer: {
     /*
     0 = STOP
