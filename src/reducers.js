@@ -75,7 +75,12 @@ const tasksApp = (state = initialState, action) => {
           deadline: action.deadline,
           status: 1,
         },
-        tasks: state.tasks.filter(task => task.id !== action.task.id),
+        tasks: state.tasks.map(task => {
+          if (task.id === action.task.id) {
+            task.status = -1;
+          }
+          return task
+        }),
       }
 
       case types.PAUSE_TIMER:
