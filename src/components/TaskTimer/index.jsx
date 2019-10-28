@@ -68,10 +68,10 @@ class TaskTimer extends Component {
     return (
       <div>
         <Row type="flex" justify="center">
-          <Col span={16}>
+          <Col span={12}>
             <Countdown item={timer} finish={() => this.onFinish()} />
           </Col>
-          <Col span={8}>
+          <Col span={12}>
             <Buttons
               status={timer.status}
               canStart={canStart}
