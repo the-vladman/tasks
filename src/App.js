@@ -9,14 +9,15 @@ class App extends Component {
     return (
       <div className="App">
         <Layout>
-          <Header />
-          <Content style={{ padding: 24, margin: 0, minHeight: "100vh" }}>
-            <Row type="flex" justify="center" style={{ marginTop: 24 }}>
+          <Header style={{ position: 'fixed', zIndex: 1, width: '100%', height: 100 }}>
+          <Row type="flex" justify="center" style={{ marginTop: 24 }}>
               <Col span={12}>
                 <Timer />
               </Col>
             </Row>
-            <Row type="flex" justify="center" style={{ marginTop: 24 }}>
+          </Header>
+          <Content style={{ padding: 24, margin: 0, minHeight: "100vh" }}>
+            <Row type="flex" justify="center" style={{ marginTop: 100 }}>
               <Col span={12}>
                 <List />
               </Col>
