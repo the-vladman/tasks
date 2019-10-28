@@ -6,7 +6,8 @@ const mapState = ({tasks, timer}) => {
   const nextTask = tasks[0];
   return {
     nextTask,
-    timer
+    timer,
+    canStart: tasks.length > 0 ? true : false 
   };
 };
 

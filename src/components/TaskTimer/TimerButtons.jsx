@@ -6,10 +6,11 @@ const styleControlButton = {
   fontSize: 25
 };
 
-const Buttons = ({ status, actions }) => (
+const Buttons = ({ status, actions, canStart }) => (
   <div>
     {status === 0 ? (
       <Button
+        disabled={!canStart}
         size="large"
         style={styleControlButton}
         type="primary"
