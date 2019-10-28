@@ -16,7 +16,7 @@ export const actionCreators = {
   addTask: (newTask) => {
     return {
       type: types.ADD_TASK,
-      task: { id: idTask++, ...newTask, editable: false }
+      task: { id: idTask++, ...newTask, editable: false, status: 0 }
     }
   },
   // REMOVE TASK
