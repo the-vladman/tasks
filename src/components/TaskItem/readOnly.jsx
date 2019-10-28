@@ -30,7 +30,7 @@ const TaskItem = ({ task, actions }) => {
     </div>
   );
 
-  const showTime = task.status === 1 ? task.completed_duration : task.estimated_duration;
+  const showTime = task.status === 1 ? `completed in ${task.completed_duration}` : `${task.estimated_duration} min estimated`;
   return (
     <Card.Meta
       description={
