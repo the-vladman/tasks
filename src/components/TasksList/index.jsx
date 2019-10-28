@@ -8,7 +8,7 @@ const TasksList = ({ tasks, remove, setEditable, edit }) => (
       tasks.length > 0
       ?
       tasks.map(item => (
-        <Timeline.Item key={item.id}>
+        <Timeline.Item key={item.id} color={item.status === 1 ? 'green' : 'blue' }>
           <TaskItem task={item} actions={{ remove, setEditable, edit }} />
         </Timeline.Item>
       ))

@@ -30,12 +30,13 @@ const TaskItem = ({ task, actions }) => {
     </div>
   );
 
+  const showTime = task.status === 1 ? task.completed_duration : task.estimated_duration;
   return (
     <Card.Meta
       description={
         <Paragraph style={{ fontSize: 20 }}>{task.description}</Paragraph>
       }
-      avatar={<Title level={2}>{task.estimated_duration}</Title>}
+      avatar={<Title level={2}>{showTime}</Title>}
       title={DropdownActions}
     />
   );
