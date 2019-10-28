@@ -3,8 +3,10 @@ export const types = {
   REMOVE_TASK: 'REMOVE_TASK',
   EDITABLE_TASK: 'EDITABLE_TASK',
   EDIT_TASK: 'EDIT_TASK',
-  START_TASK: 'START_TASK',
-  STOP_TASK: 'STOP_TASK',
+  START_TIMER: 'START_TIMER',
+  PAUSE_TIMER: 'PAUSE_TIMER',
+  RESET_TIMER: 'RESET_TIMER',
+  STOP_TIMER: 'STOP_TIMER',
 }
 
 let idTask = 0
@@ -41,17 +43,32 @@ export const actionCreators = {
     }
   },
   // START TASK TIMER
-  startTask: (task) => {
+  startTimer: (task, deadline) => {
     return {
-      type: types.START_TASK,
+      type: types.START_TIMER,
+      task,
+      deadline
+    }
+  },
+  // PAUSE TASK TIMER
+  pauseTimer: (elapsed) => {
+    return {
+      type: types.PAUSE_TIMER,
+      elapsed,
+    }
+  },
+  // STOP TASK TIMER
+  stopTimer: (task) => {
+    return {
+      type: types.STOP_TIMER,
       task,
     }
   },
-  // STOP TASK
-  stopTask: (task) => {
+  // RESET TASK TIMER
+  resetTimer: (time) => {
     return {
-      type: types.STOP_TASK,
-      task,
+      type: types.RESET_TIMER,
+      time,
     }
   },
 }

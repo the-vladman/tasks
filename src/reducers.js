@@ -2,8 +2,17 @@ import { types }from './actions'
 
 const initialState = {
   tasks: [],
-  timeToComplete: null,
-}
+  timer: {
+    /*
+    0 = STOP
+    1 = RUNNING
+    2 = PAUSE
+    */
+    status: 0,
+    // if pause, set the elapsed value on ms
+    elapsed: null
+  }
+};
 
 const tasksApp = (state = initialState, action) => {
   switch (action.type) {
@@ -46,24 +55,48 @@ const tasksApp = (state = initialState, action) => {
           }),
         }
 
-    case types.START_TASK:
+    case types.START_TIMER:
       return {
         ...state,
         timer: {
           runningTask: action.task,
-          deadline: Date.now() + 1000 * 60 * 3,
+          deadline: action.deadline,
           status: 1,
         },
         tasks: state.tasks.filter(task => task.id !== action.task.id),
       }
 
-    case types.STOP_TASK:
+      case types.PAUSE_TIMER:
+        return {
+          ...state,
+          timer: {
+            ...state.timer,
+            status: 2,
+            elapsed: action.elapsed
+          },
+        }
+
+    case types.RESET_TIMER:
       return {
         ...state,
-        tasks: [
-          ...state.tasks,
-          action.task
-        ],
+        timer: {
+          ...state.timer,
+          deadline: action.time,
+          status: 1,
+          elapsed: null
+        },
+      }
+
+    case types.STOP_TIMER:
+      return {
+        ...state,
+        tasks: action.task
+        ?
+          [
+            ...state.tasks,
+            action.task
+          ]
+        : [],
         timer: {
           ...initialState.timer
         }
