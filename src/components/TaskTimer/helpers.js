@@ -1,5 +1,5 @@
 // convert ms to seconds
-const multi = 1000 * 1;
+const multi = 1000 * 60;
 
 const convert = value => Date.now() + multi * value;
 
