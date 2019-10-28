@@ -4,11 +4,17 @@ import TaskItem from "../TaskItem";
 
 const TasksList = ({ tasks, remove, setEditable, edit }) => (
   <Timeline>
-    {tasks.map(item => (
-      <Timeline.Item key={item.id}>
-        <TaskItem task={item} actions={{ remove, setEditable, edit }} />
-      </Timeline.Item>
-    ))}
+    {
+      tasks.length > 0
+      ?
+      tasks.map(item => (
+        <Timeline.Item key={item.id}>
+          <TaskItem task={item} actions={{ remove, setEditable, edit }} />
+        </Timeline.Item>
+      ))
+      :
+      null
+    }
   </Timeline>
 );
 
