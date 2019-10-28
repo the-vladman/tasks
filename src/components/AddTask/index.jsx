@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Form, Input, Button, Select } from "antd";
-import { DurationTypes } from '../Constants';
+import { Col, Row, Form, Input, Button, Select } from "antd";
+import { DurationTypes } from "../Constants";
 const { Item } = Form;
 const { Option } = Select;
 
@@ -45,28 +45,39 @@ const TaskForm = Form.create({
       const { getFieldDecorator } = this.props.form;
       const iconButton = this.props.edit ? "edit" : "plus";
       return (
-        <Form layout="inline" onSubmit={this.handleSubmit}>
-          <Item hasFeedback label="Task">
-            {getFieldDecorator("description", {
-              rules: [{ required: true, message: "Required!" }]
-            })(<Input placeholder="Finish the test ..." />)}
-          </Item>
-          <Item hasFeedback label="Estimated duration">
-            {getFieldDecorator("estimated_duration", {
-              rules: [{ required: true, message: "Required!" }]
-            })(
-              <Select placeholder="Select duration" style={{ width: 150 }}>
-                {
-                  DurationTypes.map(d => <Option key={d.key} value={d.timeValue}>{`(${d.tag}) ${d.timeValue} min`}</Option>)
-                }
-              </Select>
-            )}
-          </Item>
-          <Item>
-            <Button icon={iconButton} type="primary" htmlType="submit">
-              Task
-            </Button>
-          </Item>
+        <Form onSubmit={this.handleSubmit}>
+          <Row gutter={16}>
+            <Col span={14}>
+              <Item hasFeedback>
+                {getFieldDecorator("description", {
+                  rules: [{ required: true, message: "Required!" }]
+                })(<Input placeholder="Description Task" />)}
+              </Item>
+            </Col>
+            <Col span={6}>
+              <Item hasFeedback>
+                {getFieldDecorator("estimated_duration", {
+                  rules: [{ required: true, message: "Required!" }]
+                })(
+                  <Select placeholder="Choose estimated duration">
+                    {DurationTypes.map(d => (
+                      <Option
+                        key={d.key}
+                        value={d.timeValue}
+                      >{`(${d.tag}) ${d.timeValue} min`}</Option>
+                    ))}
+                  </Select>
+                )}
+              </Item>
+            </Col>
+            <Col span={4}>
+              <Item>
+                <Button icon={iconButton} type="primary" htmlType="submit">
+                  Task
+                </Button>
+              </Item>
+            </Col>
+          </Row>
         </Form>
       );
     }
