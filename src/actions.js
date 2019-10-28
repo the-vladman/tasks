@@ -1,23 +1,31 @@
 export const types = {
   ADD_TASK: 'ADD_TASK',
+  SELECT_FILTER: 'SELECT_FILTER',
   REMOVE_TASK: 'REMOVE_TASK',
   EDITABLE_TASK: 'EDITABLE_TASK',
+  COMPLETED_TASK: 'COMPLETED_TASK',
   EDIT_TASK: 'EDIT_TASK',
-  RUNNING_TASK: 'RUNNING_TASK',
-  STOP_TASK: 'STOP_TASK',
+  START_TIMER: 'START_TIMER',
+  PAUSE_TIMER: 'PAUSE_TIMER',
+  RESET_TIMER: 'RESET_TIMER',
+  STOP_TIMER: 'STOP_TIMER',
 }
 
 let idTask = 0
 
 export const actionCreators = {
   // ADD TASK
-  addTask: (task) => {
+  addTask: (newTask) => {
     return {
       type: types.ADD_TASK,
-      id: idTask++,
-      title: task.title,
-      typeTask: task.type,
-      description: '',
+      task: { id: idTask++, ...newTask, editable: false, status: 0 }
+    }
+  },
+  // SELECT FILTER for TODOs List
+  selectFilter: (value) => {
+    return {
+      type: types.SELECT_FILTER,
+      value
     }
   },
   // REMOVE TASK
@@ -34,27 +42,50 @@ export const actionCreators = {
       id,
     }
   },
+  // COMPLETED TASK
+  completedTask: (id, time) => {
+    return {
+      type: types.COMPLETED_TASK,
+      id,
+      time
+    }
+  },
   // EDIT TASK
   editTask: (task) => {
     return {
       type: types.EDIT_TASK,
       id: task.id,
-      typeTask: task.type,
+      estimated_duration: task.estimated_duration,
       description: task.description,
     }
   },
-  // RUNNING TASK
-  runningTask: (id) => {
+  // START TASK TIMER
+  startTimer: (task, deadline) => {
     return {
-      type: types.RUNNING_TASK,
-      id,
+      type: types.START_TIMER,
+      task,
+      deadline
     }
   },
-  // STOP TASK
-  stopTask: (id) => {
+  // PAUSE TASK TIMER
+  pauseTimer: (elapsed) => {
     return {
-      type: types.STOP_TASK,
-      id,
+      type: types.PAUSE_TIMER,
+      elapsed,
+    }
+  },
+  // STOP TASK TIMER
+  stopTimer: (task) => {
+    return {
+      type: types.STOP_TIMER,
+      task,
+    }
+  },
+  // RESET TASK TIMER
+  resetTimer: (time) => {
+    return {
+      type: types.RESET_TIMER,
+      time,
     }
   },
 }
