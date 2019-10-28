@@ -1,5 +1,6 @@
 export const types = {
   ADD_TASK: 'ADD_TASK',
+  SELECT_FILTER: 'SELECT_FILTER',
   REMOVE_TASK: 'REMOVE_TASK',
   EDITABLE_TASK: 'EDITABLE_TASK',
   COMPLETED_TASK: 'COMPLETED_TASK',
@@ -18,6 +19,13 @@ export const actionCreators = {
     return {
       type: types.ADD_TASK,
       task: { id: idTask++, ...newTask, editable: false, status: 0 }
+    }
+  },
+  // SELECT FILTER for TODOs List
+  selectFilter: (value) => {
+    return {
+      type: types.SELECT_FILTER,
+      value
     }
   },
   // REMOVE TASK

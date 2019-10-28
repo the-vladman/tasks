@@ -8,6 +8,7 @@ const initialState = {
       -1 = ON TIMER
     */
   ],
+  filter: null,
   timer: {
     /*
     0 = STOP
@@ -29,6 +30,13 @@ const tasksApp = (state = initialState, action) => {
           ...state.tasks,
           action.task
         ],
+      }
+
+
+    case types.SELECT_FILTER:
+      return {
+        ...state,
+        filter: action.value
       }
 
     case types.REMOVE_TASK:
