@@ -3,6 +3,7 @@ import { Tabs, Icon } from "antd";
 import { connect } from "react-redux";
 import TaskList from "../components/TasksList";
 import { actionCreators } from "../actions";
+import Filter from './Filter';
 const { TabPane } = Tabs;
 
 const TabPanel = ({ todos, completed, edit, remove, setEditable }) => {
@@ -18,6 +19,7 @@ const TabPanel = ({ todos, completed, edit, remove, setEditable }) => {
         }
         key="1"
       >
+        <Filter />
         <TaskList tasks={todos} {...actions} />
       </TabPane>
       <TabPane
