@@ -12,8 +12,10 @@ const mapState = ({tasks, timer}) => {
 
 const mapDispatch = dispatch => {
   return {
-    start: (t) => dispatch(actionCreators.startTask(t)),
-    stop: (t) => dispatch(actionCreators.stopTask(t)),
+    start: (t, d) => dispatch(actionCreators.startTimer(t, d)),
+    pause: (t) => dispatch(actionCreators.pauseTimer(t)),
+    stop: (t) => dispatch(actionCreators.stopTimer(t)),
+    reset: (t) => dispatch(actionCreators.resetTimer(t)),
   };
 };
 
