@@ -43,8 +43,18 @@ class TaskTimer extends Component {
     reset(deadline);
   }
 
+  setCompleted(){
+    const { timer, setCompleted } = this.props;
+    const { runningTask, deadline } = timer;
+    const now = Date.now();
+    const remaining = deadline - now;
+    const duration = multi * runningTask.estimated_duration - remaining;
+    setCompleted(runningTask.id, msToTime(duration))
+  }
+
   onFinish() {
     const { nextTask, start, stop } = this.props;
+    this.setCompleted();
     if (nextTask) {
       const deadline = convert(nextTask.estimated_duration);
       start(nextTask, deadline);
@@ -69,6 +79,7 @@ class TaskTimer extends Component {
                 start: () => this.startTimer(),
                 pause: () => this.pauseTimer(),
                 resume: () => this.resumeTimer(),
+                completed: () => this.onFinish(),
                 stop: () => this.stopTimer(),
                 reset: () => this.resetTimer()
               }}
