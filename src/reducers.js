@@ -107,13 +107,12 @@ const tasksApp = (state = initialState, action) => {
     case types.STOP_TIMER:
       return {
         ...state,
-        tasks: action.task
-        ?
-          [
-            action.task,
-            ...state.tasks,
-          ]
-        : [],
+        tasks: state.tasks.map(task => {
+          if (action.task && task.id === action.task.id) {
+            task.status = 0;
+          }
+          return task
+        }),
         timer: {
           ...initialState.timer
         }
