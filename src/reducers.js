@@ -93,8 +93,8 @@ const tasksApp = (state = initialState, action) => {
         tasks: action.task
         ?
           [
+            action.task,
             ...state.tasks,
-            action.task
           ]
         : [],
         timer: {
