@@ -4,9 +4,9 @@ import Countdown from "./TimerCountdown";
 import Buttons from "./TimerButtons";
 
 class TaskTimer extends Component {
-  convert(value) {
-    return Date.now() + 1000 * 1 * value;
-  }
+  // convert ms to seconds
+  multi = 1000 * 60;
+  convert = value => Date.now() + this.multi * value;
 
   startTimer() {
     const { nextTask, start } = this.props;
@@ -28,7 +28,7 @@ class TaskTimer extends Component {
     const { runningTask, deadline } = timer;
     const now = Date.now();
     const remaining = deadline - now;
-    const elapsed = 1000 * 1 * runningTask.estimated_duration - remaining;
+    const elapsed = this.multi * runningTask.estimated_duration - remaining;
     pause(elapsed);
   }
 
@@ -41,8 +41,7 @@ class TaskTimer extends Component {
 
   resetTimer() {
     const { timer, reset } = this.props;
-    const deadline =
-      Date.now() + 1000 * 1 * timer.runningTask.estimated_duration;
+    const deadline = this.convert(timer.runningTask.estimated_duration);
     reset(deadline);
   }
 
