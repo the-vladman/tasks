@@ -1,6 +1,7 @@
 {
   "name": "tasks",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "homepage": "https://the-vladman.github.io/tasks",
   "private": true,
   "dependencies": {
     "antd": "3.24.3",
@@ -13,6 +14,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -24,5 +27,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "gh-pages": "^2.1.1"
+  }
 }
