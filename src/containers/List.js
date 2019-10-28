@@ -37,8 +37,13 @@ const TabPanel = ({ todos, completed, edit, remove, setEditable }) => {
   );
 };
 
-const mapState = ({ tasks }) => {
-  const todos = tasks.filter(t => t.status === 0);
+const filterTodos = (todos, filter) => {
+  const filtered = filter ? todos.filter(t => t.estimated_duration === filter) : todos;
+  return filtered;
+};
+
+const mapState = ({ tasks, filter }) => {
+  const todos = filterTodos(tasks.filter(t => t.status === 0), filter);
   const completed = tasks.filter(t => t.status === 1);
   return {
     todos,
