@@ -2,6 +2,7 @@ export const types = {
   ADD_TASK: 'ADD_TASK',
   REMOVE_TASK: 'REMOVE_TASK',
   EDITABLE_TASK: 'EDITABLE_TASK',
+  COMPLETED_TASK: 'COMPLETED_TASK',
   EDIT_TASK: 'EDIT_TASK',
   START_TIMER: 'START_TIMER',
   PAUSE_TIMER: 'PAUSE_TIMER',
@@ -31,6 +32,14 @@ export const actionCreators = {
     return {
       type: types.EDITABLE_TASK,
       id,
+    }
+  },
+  // COMPLETED TASK
+  completedTask: (id, time) => {
+    return {
+      type: types.COMPLETED_TASK,
+      id,
+      time
     }
   },
   // EDIT TASK

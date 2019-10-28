@@ -42,6 +42,18 @@ const tasksApp = (state = initialState, action) => {
         }),
       }
 
+      case types.COMPLETED_TASK:
+      return {
+        ...state,
+        tasks: state.tasks.map(task => {
+          if (task.id === action.id) {
+            task.status = 1;
+            task.completed_duration = action.time;
+          }
+          return task
+        }),
+      }
+      
       case types.EDIT_TASK:
         return {
           ...state,
