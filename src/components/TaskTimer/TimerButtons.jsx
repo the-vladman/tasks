@@ -20,35 +20,46 @@ const Buttons = ({ status, actions, canStart }) => (
         Start
       </Button>
     ) : (
-      <Group>
-        {status === 2 ? (
+      <div>
+        <Button
+          size="large"
+          type="primary"
+          style={{ fontSize: 25, margin: 10 }}
+          icon="check-circle"
+          onClick={actions.completed}
+        >
+          task
+        </Button>
+        <Group>
+          {status === 2 ? (
+            <Button
+              size="large"
+              style={styleControlButton}
+              icon="play-circle"
+              onClick={actions.resume}
+            />
+          ) : (
+            <Button
+              size="large"
+              style={styleControlButton}
+              icon="pause-circle"
+              onClick={actions.pause}
+            />
+          )}
           <Button
             size="large"
             style={styleControlButton}
-            icon="play-circle"
-            onClick={actions.resume}
+            icon="stop"
+            onClick={actions.stop}
           />
-        ) : (
           <Button
             size="large"
             style={styleControlButton}
-            icon="pause-circle"
-            onClick={actions.pause}
+            icon="undo"
+            onClick={actions.reset}
           />
-        )}
-        <Button
-          size="large"
-          style={styleControlButton}
-          icon="stop"
-          onClick={actions.stop}
-        />
-        <Button
-          size="large"
-          style={styleControlButton}
-          icon="undo"
-          onClick={actions.reset}
-        />
-      </Group>
+        </Group>
+      </div>
     )}
   </div>
 );
