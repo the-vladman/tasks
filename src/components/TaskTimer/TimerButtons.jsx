@@ -3,14 +3,12 @@ import { Button } from "antd";
 const { Group } = Button;
 
 const styleControlButton = {
-    fontSize: 25
+  fontSize: 25
 };
 
 const Buttons = ({ status, actions }) => (
   <div>
-    {
-      status === 0
-      ?
+    {status === 0 ? (
       <Button
         size="large"
         style={styleControlButton}
@@ -18,15 +16,25 @@ const Buttons = ({ status, actions }) => (
         icon="play-circle"
         onClick={actions.start}
       >
-      Start
+        Start
       </Button>
-      :
+    ) : (
       <Group>
-        <Button
-          size="large"
-          style={styleControlButton}
-          icon="pause-circle"
-        />
+        {status === 2 ? (
+          <Button
+            size="large"
+            style={styleControlButton}
+            icon="play-circle"
+            onClick={actions.resume}
+          />
+        ) : (
+          <Button
+            size="large"
+            style={styleControlButton}
+            icon="pause-circle"
+            onClick={actions.pause}
+          />
+        )}
         <Button
           size="large"
           style={styleControlButton}
@@ -37,9 +45,10 @@ const Buttons = ({ status, actions }) => (
           size="large"
           style={styleControlButton}
           icon="undo"
+          onClick={actions.reset}
         />
       </Group>
-    }
+    )}
   </div>
 );
 
