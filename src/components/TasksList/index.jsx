@@ -1,5 +1,5 @@
 import React from "react";
-import { Timeline } from "antd";
+import { Timeline, Card, Empty } from "antd";
 import TaskItem from "../TaskItem";
 
 const TasksList = ({ tasks, remove, setEditable, edit }) => (
@@ -13,7 +13,9 @@ const TasksList = ({ tasks, remove, setEditable, edit }) => (
         </Timeline.Item>
       ))
       :
-      null
+      <Card>
+        <Empty/>
+      </Card>
     }
   </Timeline>
 );
