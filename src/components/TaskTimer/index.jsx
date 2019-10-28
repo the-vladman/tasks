@@ -2,16 +2,14 @@ import React, { Component } from "react";
 import { Row, Col } from "antd";
 import Countdown from "./TimerCountdown";
 import Buttons from "./TimerButtons";
+import { multi, convert, msToTime } from './helpers';
 
 class TaskTimer extends Component {
-  // convert ms to seconds
-  multi = 1000 * 60;
-  convert = value => Date.now() + this.multi * value;
-
+  
   startTimer() {
     const { nextTask, start } = this.props;
     if (nextTask) {
-      const deadline = this.convert(nextTask.estimated_duration);
+      const deadline = convert(nextTask.estimated_duration);
       start(nextTask, deadline);
     }
   }
@@ -28,27 +26,27 @@ class TaskTimer extends Component {
     const { runningTask, deadline } = timer;
     const now = Date.now();
     const remaining = deadline - now;
-    const elapsed = this.multi * runningTask.estimated_duration - remaining;
+    const elapsed = multi * runningTask.estimated_duration - remaining;
     pause(elapsed);
   }
 
   resumeTimer() {
     const { timer, reset } = this.props;
     const { runningTask, elapsed } = timer;
-    const deadline = this.convert(runningTask.estimated_duration) - elapsed;
+    const deadline = convert(runningTask.estimated_duration) - elapsed;
     reset(deadline);
   }
 
   resetTimer() {
     const { timer, reset } = this.props;
-    const deadline = this.convert(timer.runningTask.estimated_duration);
+    const deadline = convert(timer.runningTask.estimated_duration);
     reset(deadline);
   }
 
   onFinish() {
     const { nextTask, start, stop } = this.props;
     if (nextTask) {
-      const deadline = this.convert(nextTask.estimated_duration);
+      const deadline = convert(nextTask.estimated_duration);
       start(nextTask, deadline);
     } else {
       stop();
