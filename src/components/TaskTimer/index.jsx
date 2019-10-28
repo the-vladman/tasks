@@ -10,8 +10,8 @@ class TaskTimer extends Component {
 
   startTimer() {
     const { nextTask, start } = this.props;
-    const deadline = this.convert(nextTask.estimated_duration);
     if (nextTask) {
+      const deadline = this.convert(nextTask.estimated_duration);
       start(nextTask, deadline);
     }
   }
@@ -48,7 +48,8 @@ class TaskTimer extends Component {
   onFinish() {
     const { nextTask, start, stop } = this.props;
     if (nextTask) {
-      start(nextTask);
+      const deadline = this.convert(nextTask.estimated_duration);
+      start(nextTask, deadline);
     } else {
       stop();
     }
