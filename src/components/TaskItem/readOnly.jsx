@@ -1,28 +1,21 @@
 import React from "react";
-import {
-  Card,
-  Typography,
-  Icon,
-  Menu,
-  Dropdown
-} from "antd";
+import { Card, Typography, Icon, Menu, Dropdown } from "antd";
 const { Title, Paragraph } = Typography;
 const { Item } = Menu;
 
-const TaskItem = ({task, actions}) => {
+const TaskItem = ({ task, actions }) => {
   const menu = (
     <Menu>
-      <Item
-        style={{ color: "#08c" }}
-        onClick={() => actions.setEditable(task.id)}
-      >
-        <Icon type="edit" />
-        <span>Edit</span>
-      </Item>
-      <Item
-        style={{ color: "red" }}
-        onClick={() => actions.remove(task.id)}
-      >
+      {task.status === 0 && (
+        <Item
+          style={{ color: "#08c" }}
+          onClick={() => actions.setEditable(task.id)}
+        >
+          <Icon type="edit" />
+          <span>Edit</span>
+        </Item>
+      )}
+      <Item style={{ color: "red" }} onClick={() => actions.remove(task.id)}>
         <Icon type="close" />
         <span>Remove</span>
       </Item>
