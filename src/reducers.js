@@ -2,8 +2,17 @@ import { types }from './actions'
 
 const initialState = {
   tasks: [],
-  timeToComplete: null,
-}
+  timer: {
+    /*
+    0 = STOP
+    1 = RUNNING
+    2 = PAUSE
+    */
+    status: 0,
+    // if pause, set the elapsed value on ms
+    elapsed: null
+  }
+};
 
 const tasksApp = (state = initialState, action) => {
   switch (action.type) {
@@ -27,7 +36,7 @@ const tasksApp = (state = initialState, action) => {
         ...state,
         tasks: state.tasks.map(task => {
           if (task.id === action.id) {
-            task.status = 1
+            task.editable = true;
           }
           return task
         }),
@@ -38,34 +47,59 @@ const tasksApp = (state = initialState, action) => {
           ...state,
           tasks: state.tasks.map(task => {
             if (task.id === action.id) {
-              task.type = action.typeTask
-              task.description = action.description
-              task.status = 0
+              task.estimated_duration = action.estimated_duration;
+              task.description = action.description;
+              task.editable = false;
             }
             return task
           }),
         }
 
-    case types.RUNNING_TASK:
+    case types.START_TIMER:
       return {
         ...state,
-        tasks: state.tasks.map(task => {
-          if (task.id === action.id) {
-            task.status = 2
-          }
-          return task
-        }),
+        timer: {
+          runningTask: action.task,
+          deadline: action.deadline,
+          status: 1,
+        },
+        tasks: state.tasks.filter(task => task.id !== action.task.id),
       }
 
-    case types.STOP_TASK:
+      case types.PAUSE_TIMER:
+        return {
+          ...state,
+          timer: {
+            ...state.timer,
+            status: 2,
+            elapsed: action.elapsed
+          },
+        }
+
+    case types.RESET_TIMER:
       return {
         ...state,
-        tasks: state.tasks.map(task => {
-          if (task.id === action.id) {
-            task.status = 0
-          }
-          return task
-        }),
+        timer: {
+          ...state.timer,
+          deadline: action.time,
+          status: 1,
+          elapsed: null
+        },
+      }
+
+    case types.STOP_TIMER:
+      return {
+        ...state,
+        tasks: action.task
+        ?
+          [
+            ...state.tasks,
+            action.task
+          ]
+        : [],
+        timer: {
+          ...initialState.timer
+        }
       }
 
     default:

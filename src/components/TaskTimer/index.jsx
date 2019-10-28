@@ -1,53 +1,79 @@
-import React, { Component } from 'react';
-import { Statistic, Button, Row, Col, } from 'antd';
-const Countdown = Statistic.Countdown;
+import React, { Component } from "react";
+import { Row, Col } from "antd";
+import Countdown from "./TimerCountdown";
+import Buttons from "./TimerButtons";
 
 class TaskTimer extends Component {
+  // convert ms to seconds
+  multi = 1000 * 60;
+  convert = value => Date.now() + this.multi * value;
 
   startTimer() {
-    const { tasks } = this.props
-    const firstTask = tasks[0]
-    let timeCount = null
-    switch (firstTask.type) {
-      case 's':
-        timeCount = Date.now() + 1000 * 60 * 30
-        break;
-      case 'm':
-        timeCount = Date.now() + 1000 * 60 * 60
-        break;
-      case 'l':
-        timeCount = Date.now() + 1000 * 60 * 120
-        break;
-      default:
-        timeCount = Date.now() + 1000 * 60 * 30
+    const { nextTask, start } = this.props;
+    const deadline = this.convert(nextTask.estimated_duration);
+    if (nextTask) {
+      start(nextTask, deadline);
     }
-    console.log('START');
-    
   }
 
   stopTimer() {
-    console.log('STOP');
+    const { timer, stop } = this.props;
+    if (timer.runningTask) {
+      stop(timer.runningTask);
+    }
+  }
+
+  pauseTimer() {
+    const { timer, pause } = this.props;
+    const { runningTask, deadline } = timer;
+    const now = Date.now();
+    const remaining = deadline - now;
+    const elapsed = this.multi * runningTask.estimated_duration - remaining;
+    pause(elapsed);
+  }
+
+  resumeTimer() {
+    const { timer, reset } = this.props;
+    const { runningTask, elapsed } = timer;
+    const deadline = this.convert(runningTask.estimated_duration) - elapsed;
+    reset(deadline);
+  }
+
+  resetTimer() {
+    const { timer, reset } = this.props;
+    const deadline = this.convert(timer.runningTask.estimated_duration);
+    reset(deadline);
   }
 
   onFinish() {
-    console.log('finished!');
+    const { nextTask, start, stop } = this.props;
+    if (nextTask) {
+      start(nextTask);
+    } else {
+      stop();
+    }
   }
 
   render() {
-    const deadline = Date.now() + 1000 * 60 * 3;
+    const { timer, canStart } = this.props;
     return (
       <div>
         <Row type="flex" justify="center">
           <Col span={16}>
-            { deadline
-              ?
-              <Button type="primary" onClick={this.stopTimer} icon='stop'>Parar</Button>
-              :
-              <Button type="primary" onClick={this.startTimer} icon='play-circle'>Empezar</Button>
-            }
+            <Countdown item={timer} finish={() => this.onFinish()} />
           </Col>
-          <Col span={6}>
-            { deadline ? <Countdown title="Challenge" value={deadline} onFinish={this.onFinish} /> : null }
+          <Col span={8}>
+            <Buttons
+              status={timer.status}
+              canStart={canStart}
+              actions={{
+                start: () => this.startTimer(),
+                pause: () => this.pauseTimer(),
+                resume: () => this.resumeTimer(),
+                stop: () => this.stopTimer(),
+                reset: () => this.resetTimer()
+              }}
+            />
           </Col>
         </Row>
       </div>
